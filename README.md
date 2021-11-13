@@ -1,0 +1,2 @@
+# DesignObject
+A design object is an object used to represent a collection of shapes in a 2D coordinate system. A shape is a rectangle object and includes information about where they lie within the parent design object with respect to the 0,0 (origin). In addition to shapes, a design can have other designs embedded within it. These are modeled through Instance objects. For example, a design object d1 can contain an instance i1 which has two pieces of information – a reference to another design object d2 and where d2’s origin is situated within the 2D coordinates of d1. 
