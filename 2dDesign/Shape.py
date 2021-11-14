@@ -1,18 +1,28 @@
 class Shape:
-    SubDesignCount = 0
-    SubDesigns=[]
 
-    def __init__(self, _LocationX, _LocationY, _Height, _Width) -> None:
+    def __init__(self, _LocationX, _LocationY, _Height, _Width, _Name) -> None:
         self.LocationX = _LocationX
         self.LocationY = _LocationY
         self.Height = _Height
         self.Width = _Width
+        self.Name = _Name
+        self.SubDesignCount = 0
+        self.SubDesigns = []
+        self.Name = _Name
 
     def PrintValues(self):
-        print("LocX:%d LocY:%d Hi:%d Wid:%d SubDesignsCount:%d" % (self.LocationX, self.LocationY, self.Height, self.Width, self.SubDesignCount))
+        print("Name:%s LocX:%d LocY:%d Hi:%d Wid:%d SubDesignsCount:%d" % (self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.SubDesignCount))
         if self.SubDesignCount > 0:
             for SubDesign in self.SubDesigns:
-                SubDesign.PrintValues()
+                SubDesign.PrintSubDesign("")
+        print()
+
+    def PrintSubDesign(self, _offset):
+        offset = "-" + _offset
+        print(offset + "Name:%s LocX:%d LocY:%d Hi:%d Wid:%d SubDesignsCount:%d" % (self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.SubDesignCount))
+        if self.SubDesignCount > 0:
+            for SubDesign in self.SubDesigns:
+                SubDesign.PrintSubDesign(offset)
         
     def AddSubDesign(self, SubDesign):
         assert type(SubDesign) == Shape
@@ -21,6 +31,6 @@ class Shape:
         if self.Height < SubDesign.Height + SubDesign.LocationY:
             self.Height = SubDesign.Height + SubDesign.LocationY
         if self.Width < SubDesign.Width + SubDesign.LocationX:
-            self.Height = SubDesign.Width + SubDesign.LocationX
+            self.Width = SubDesign.Width + SubDesign.LocationX
 
 
