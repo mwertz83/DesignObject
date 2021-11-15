@@ -11,19 +11,19 @@ class Shape:
         self.Name = _Name
         self.Area = self.Width * self.Height
 
-    def PrintValues(self):
-        print("Name:%s LocX:%d LocY:%d Hi:%d Wid:%d SubDesignsCount:%d" % (self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.SubDesignCount))
-        if self.SubDesignCount > 0:
+    def PrintValues(self, depth):
+        print("Depth:%d Name:%s LocX:%d LocY:%d Hi:%d Wid:%d Area:%s SubDesignsCount:%d" % (depth, self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.Area, self.SubDesignCount))
+        if self.SubDesignCount and depth != 0:
             for SubDesign in self.SubDesigns:
-                SubDesign.PrintSubDesign("")
+                SubDesign.PrintSubDesign("", depth if depth < 0 else depth-1)
         print()
 
-    def PrintSubDesign(self, _offset):
+    def PrintSubDesign(self, _offset, depth):
         offset = "-" + _offset
-        print(offset + "Name:%s LocX:%d LocY:%d Hi:%d Wid:%d SubDesignsCount:%d" % (self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.SubDesignCount))
-        if self.SubDesignCount > 0:
+        print(offset + "Depth:%s Name:%s LocX:%d LocY:%d Hi:%d Wid:%d Area:%d SubDesignsCount:%d" % (depth, self.Name, self.LocationX, self.LocationY, self.Height, self.Width, self.Area, self.SubDesignCount))
+        if self.SubDesignCount and depth != 0:
             for SubDesign in self.SubDesigns:
-                SubDesign.PrintSubDesign(offset)
+                SubDesign.PrintSubDesign(offset, depth if depth < 0 else depth-1)
         
     def AddSubDesign(self, SubDesign):
         assert type(SubDesign) == Shape
@@ -37,3 +37,6 @@ class Shape:
 
     def SortArea(self):
         self.SubDesigns.sort(key=lambda Shape: Shape.Area)
+
+    def ReturnOneLevel(self):
+        self.PrintValues(1)
