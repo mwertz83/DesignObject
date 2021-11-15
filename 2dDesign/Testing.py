@@ -1,9 +1,9 @@
 from Shape import Shape
 
-x = Shape(1,2,3,4, "X")
+x = Shape(1,2,3,4,"X")
 x.PrintValues()
 
-y = Shape(5,6,7,8, "Y")
+y = Shape(5,6,7,8,"Y")
 y.PrintValues()
 
 x.AddSubDesign(y)
@@ -15,4 +15,7 @@ c.PrintValues()
 
 b = Shape(2,2,2,2,"B")
 c.AddSubDesign(b)
+c.PrintValues()
+
+c.SortArea()
 c.PrintValues()
